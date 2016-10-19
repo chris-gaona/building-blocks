@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w test.js"
+    "test": "NODE_ENV=test mocha -w test.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mocha": "^3.1.2",
+    "redis": "^2.6.2",
     "supertest": "^2.0.0"
   }
 }

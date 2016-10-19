@@ -6,20 +6,24 @@ var urlencode = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 
-var cities = {
-    'Lotopia': 'some description',
-    'Caspiana': 'description',
-    'Ingido': 'description'
-};
+var redis = require('redis');
+var client = redis.createClient();
+
+client.select((process.env.NODE_ENV || 'development').length);
 
 app.get('/cities', function (req, res) {
-   res.json(Object.keys(cities));
+    client.hkeys('cities', function (err, names) {
+        if (err) throw err;
+        res.json(names);
+    });
 });
 
 app.post('/cities', urlencode, function (req, res) {
     var newCity = req.body;
-    cities[newCity.name] = newCity.description;
-    res.status(201).json(newCity.name);
+    client.hset('cities', newCity.name, newCity.description, function (err) {
+        if (err) throw err;
+        res.status(201).json(newCity.name);
+    });
 });
 
 module.exports = app;
