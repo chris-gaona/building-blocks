@@ -42,3 +42,19 @@ describe('Listing cities on /cities using GET ', function () {
     });
 });
 
+describe('Creating new cities', function () {
+    it('should return a 201 status code', function (done) {
+        request(app)
+            .post('/cities')
+            .send('name=Springfield&description=where+the+simpsons+live')
+            .expect(201, done);
+    });
+
+    it('should return city name', function (done) {
+        request(app)
+            .post('/cities')
+            .send('name=Springfield&description=where+the+simpsons+live')
+            .expect(/springfield/i, done);
+    });
+});
+
