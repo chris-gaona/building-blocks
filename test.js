@@ -46,10 +46,6 @@ describe('Listing cities on /cities using GET ', function () {
 });
 
 describe('Creating new cities', function () {
-    before(function () {
-
-    });
-
     it('should return a 201 status code', function (done) {
         request(app)
             .post('/cities')
@@ -62,6 +58,13 @@ describe('Creating new cities', function () {
             .post('/cities')
             .send('name=Springfield&description=where+the+simpsons+live')
             .expect(/springfield/i, done);
+    });
+
+    it('should validate city name & description', function (done) {
+        request(app)
+            .post('/cities')
+            .send('name=&description=')
+            .expect(400, done);
     });
 });
 
