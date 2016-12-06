@@ -8,8 +8,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test mocha -w test.js",
-    "postinstall": "redis-server"
+    "test": "NODE_ENV=test mocha -w test.js"
   },
   "author": "",
   "license": "ISC",
