@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var urlencode = bodyParser.urlencoded({ extended: false });
 
+// adds simple comment
+
 // Redis connection
 var redis = require('redis');
 
